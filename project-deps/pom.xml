@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation=" http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>mycompany.project</groupId>
+		<artifactId>project-parent</artifactId>
+		<version>1.0-SNAPSHOT</version>
+		<relativePath>../project-parent/pom.xml</relativePath>
+	</parent>
+
+	<groupId>mycompany.project</groupId>
+	<artifactId>project-deps</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<properties>
+		<company-deps.version>1.0-SNAPSHOT</company-deps.version>
+
+		<maven.compiler.source>1.6</maven.compiler.source>
+		<maven.compiler.target>1.6</maven.compiler.target>
+
+		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+
+		<version.maven.plugin.project-maven-scan-source>2.3</version.maven.plugin.project-maven-scan-source>
+
+		<version.frk.aspectj>1.6.12</version.frk.aspectj>
+
+		<version.frk.hibernate>3.6.10.Final</version.frk.hibernate>
+		<version.frk.hibernate-commons-annotations>3.2.0.Final</version.frk.hibernate-commons-annotations>
+		<version.frk.hibernate-javassist>3.16.1-GA</version.frk.hibernate-javassist>
+
+		<version.frk.javax-security-jacc>1.5</version.frk.javax-security-jacc>
+		<version.api.jsf-facelets>1.1.15</version.api.jsf-facelets>
+		<version.api.javax-el>2.2</version.api.javax-el>
+		<version.frk.jboss-el>1.0_02.CR6</version.frk.jboss-el>
+		<version.frk.catalina>6.0</version.frk.catalina>
+
+		<version.frk.richfaces>3.3.3.Final</version.frk.richfaces>
+		<version.frk.richfaces-impl>3.3.3.Final</version.frk.richfaces-impl>
+		<version.frk.nekohtml>1.9.19</version.frk.nekohtml>
+
+		<jaxb-api.version>2.1</jaxb-api.version>
+		<jaxb-impl.version>2.1.13</jaxb-impl.version>
+		<version.frk.xstream>1.4.7</version.frk.xstream>
+
+		<version.frk.ehcache>2.7.5</version.frk.ehcache>
+		<version.frk.ehcache-spring-annotations>1.2.0</version.frk.ehcache-spring-annotations>
+
+		<version.frk.slf4j>1.7.7</version.frk.slf4j>
+		<version.frk.logback>1.1.2</version.frk.logback>
+
+		<version.frk.jdom>2.0.5</version.frk.jdom>
+
+		<version.frk.jamon>2.7</version.frk.jamon>
+
+		<version.frk.jackson>2.3.1</version.frk.jackson>
+
+		<version.test.junit>4.11</version.test.junit>
+		<version.test.easymock-extension>3.2</version.test.easymock-extension>
+		<version.test.unitils>3.3</version.test.unitils>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>mycompany</groupId>
+				<artifactId>company-deps</artifactId>
+				<version>${company-deps.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-core</artifactId>
+				<version>${version.frk.logback}</version>
+			</dependency>
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${version.frk.logback}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${version.frk.slf4j}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-simple</artifactId>
+				<version>${version.frk.slf4j}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jcl-over-slf4j</artifactId>
+				<version>${version.frk.slf4j}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jul-to-slf4j</artifactId>
+				<version>${version.frk.slf4j}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>log4j-over-slf4j</artifactId>
+				<version>${version.frk.slf4j}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-nop</artifactId>
+				<version>${version.frk.slf4j}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-core</artifactId>
+				<version>${version.frk.jackson}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${version.frk.jackson}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-annotations</artifactId>
+				<version>${version.frk.jackson}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjrt</artifactId>
+				<version>${version.frk.aspectj}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjweaver</artifactId>
+				<version>${version.frk.aspectj}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjlib</artifactId>
+				<version>${version.frk.aspectj}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-commons-annotations</artifactId>
+				<version>${version.frk.hibernate-commons-annotations}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-core</artifactId>
+				<version>${version.frk.hibernate}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>javax.transaction</groupId>
+						<artifactId>jta</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>commons-collections</groupId>
+						<artifactId>commons-collections</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.javassist</groupId>
+				<artifactId>javassist</artifactId>
+				<version>${version.frk.hibernate-javassist}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-validator</artifactId>
+				<version>${hibernate-validator.version}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>com.sun.facelets</groupId>
+				<artifactId>jsf-facelets</artifactId>
+				<version>${version.api.jsf-facelets}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.el</groupId>
+				<artifactId>el-api</artifactId>
+				<version>${version.api.javax-el}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.el</groupId>
+				<artifactId>jboss-el</artifactId>
+				<version>${version.frk.jboss-el}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>javax.el</groupId>
+						<artifactId>el-api</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.catalina</groupId>
+				<artifactId>catalina</artifactId>
+				<version>${version.frk.catalina}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.richfaces.framework</groupId>
+				<artifactId>richfaces-api</artifactId>
+				<version>${version.frk.richfaces}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>commons-logging</groupId>
+						<artifactId>commons-logging</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.richfaces.framework</groupId>
+				<artifactId>richfaces-impl</artifactId>
+				<version>${version.frk.richfaces-impl}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.richfaces.framework</groupId>
+						<artifactId>richfaces-api</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>commons-logging</groupId>
+						<artifactId>commons-logging</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>commons-digester</groupId>
+						<artifactId>commons-digester</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.richfaces.ui</groupId>
+				<artifactId>richfaces-ui</artifactId>
+				<version>${version.frk.richfaces}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.richfaces.ui</groupId>
+				<artifactId>spacer</artifactId>
+				<version>${version.frk.richfaces}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>net.sourceforge.nekohtml</groupId>
+				<artifactId>nekohtml</artifactId>
+				<version>${version.frk.nekohtml}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>xerces</groupId>
+						<artifactId>xercesImpl</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.xml.bind</groupId>
+				<artifactId>jaxb-api</artifactId>
+				<version>${jaxb-api.version}</version>
+				<scope>provided</scope>
+				<exclusions>
+					<exclusion>
+						<groupId>javax.xml.stream</groupId>
+						<artifactId>stax-api</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>com.sun.xml.bind</groupId>
+				<artifactId>jaxb-impl</artifactId>
+				<version>${jaxb-impl.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>javax.xml.stream</groupId>
+						<artifactId>stax-api</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+			<dependency>
+				<groupId>com.sun.xml.bind</groupId>
+				<artifactId>jaxb-xjc</artifactId>
+				<version>${jaxb-impl.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>com.sun.xml.bind</groupId>
+						<artifactId>jaxb-impl</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>javax.xml.stream</groupId>
+						<artifactId>stax-api</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+			<dependency>
+				<groupId>com.thoughtworks.xstream</groupId>
+				<artifactId>xstream</artifactId>
+				<version>${version.frk.xstream}</version>
+			</dependency>
+
+
+			<dependency>
+				<groupId>net.sf.ehcache.internal</groupId>
+				<artifactId>ehcache-core</artifactId>
+				<version>${version.frk.ehcache}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.googlecode.ehcache-spring-annotations</groupId>
+				<artifactId>ehcache-spring-annotations</artifactId>
+				<version>${version.frk.ehcache-spring-annotations}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>net.sf.ehcache</groupId>
+						<artifactId>ehcache-core</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+			<dependency>
+				<groupId>org.easymock</groupId>
+				<artifactId>easymockclassextension</artifactId>
+				<version>${version.test.easymock-extension}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.security.jacc</groupId>
+				<artifactId>javax.security.jacc-api</artifactId>
+				<version>${version.frk.javax-security-jacc}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.jdom</groupId>
+				<artifactId>jdom2</artifactId>
+				<version>${version.frk.jdom}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.jamonapi</groupId>
+				<artifactId>jamon</artifactId>
+				<version>${version.frk.jamon}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.jamonapi</groupId>
+				<artifactId>jamon-admin</artifactId>
+				<version>${version.frk.jamon}</version>
+				<type>war</type>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>${maven.compiler.source}</source>
+						<target>${maven.compiler.target}</target>
+						<encoding>${project.build.sourceEncoding}</encoding>
+						<fork>true</fork>
+						<minmem>256</minmem>
+						<maxmem>512</maxmem>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.cxf</groupId>
+					<artifactId>cxf-codegen-plugin</artifactId>
+					<version>${version.maven.plugin.cxf-codegen-plugin}</version>
+					<executions>
+						<execution>
+							<id>generate-sources</id>
+							<goals>
+								<goal>wsdl2java</goal>
+							</goals>
+							<configuration>
+								<defaultOptions>
+									<frontEnd>jaxws21</frontEnd>
+									<bindingFiles>
+										<bindingFile>${basedir}/src/main/wsdl/bindings.xml</bindingFile>
+									</bindingFiles>
+								</defaultOptions>
+								<sourceRoot>${project.build.directory}/generated-sources</sourceRoot>
+								<wsdlRoot>${basedir}/src/main/wsdl/</wsdlRoot>
+								<includes>
+									<include>*WebService.wsdl</include>
+								</includes>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>

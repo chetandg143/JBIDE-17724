@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation=" http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>mycompany</groupId>
+		<artifactId>company-parent</artifactId>
+		<version>1.0-SNAPSHOT</version>
+		<relativePath>../company-parent/pom.xml</relativePath>
+	</parent>
+
+	<groupId>mycompany.project</groupId>
+	<artifactId>project-parent</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>${project.artifactId}</name>
+
+	<prerequisites>
+		<maven>3.1.1</maven>
+	</prerequisites>
+
+	<properties>
+		<downloadSources>false</downloadSources>
+		<downloadJavadocs>false</downloadJavadocs>
+		<forceRecheck>false</forceRecheck>
+		<wtpversion>2.0</wtpversion>
+		<eclipse.jst.jsf.version>1.2</eclipse.jst.jsf.version>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<configuration>
+					<!-- Workaround for http://jira.codehaus.org/browse/MECLIPSE-94 -->
+					<eclipseProjectDir>.</eclipseProjectDir>
+				</configuration>
+			</plugin>
+		</plugins>
+
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>net.alchim31.maven</groupId>
+					<artifactId>yuicompressor-maven-plugin</artifactId>
+					<version>1.4.0</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>2.5.1</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-clean-plugin</artifactId>
+					<configuration>
+						<filesets>
+							<fileset>
+								<directory>target</directory>
+							</fileset>
+							<fileset>
+								<directory>generated-resources</directory>
+							</fileset>
+							<fileset>
+								<directory>bin</directory>
+							</fileset>
+						</filesets>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-eclipse-plugin</artifactId>
+					<configuration>
+						<eclipseDownloadSources combine.self="override" />
+						<downloadSources combine.self="override">${downloadSources}</downloadSources>
+						<downloadJavadocs combine.self="override">${downloadJavadocs}</downloadJavadocs>
+						<forceRecheck combine.self="override">${forceRecheck}</forceRecheck>
+						<additionalBuildCommands combine.self="override" />
+						<additionalProjectnatures combine.self="override" />
+						<wtpversion combine.self="override">${wtpversion}</wtpversion>
+						<classpathContainers combine.self="override">
+							<classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER</classpathContainer>
+						</classpathContainers>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>2.5</version>
+					<configuration>
+						<updateDependencies>false</updateDependencies>
+						<arguments combine.self="override">-Prelease,distrib</arguments>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<configuration>
+						<argLine>${env.MAVEN_OPTS}
+							-Dfile.encoding=${project.build.sourceEncoding}</argLine>
+						<runOrder>alphabetical</runOrder>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.jvnet.jaxb2.maven2</groupId>
+					<artifactId>maven-jaxb2-plugin</artifactId>
+					<version>0.9.0</version>
+					<executions>
+						<execution>
+							<phase>generate-sources</phase>
+							<goals>
+								<goal>generate</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<schemaDirectory>${basedir}/src/main/resources/META-INF/xsd</schemaDirectory>
+						<generateDirectory>${project.build.directory}/generated-sources</generateDirectory>
+						<extension>true</extension>
+						<removeOldOutput>true</removeOldOutput>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>com.sun.tools.xjc.maven2</groupId>
+					<artifactId>maven-jaxb-plugin</artifactId>
+					<executions>
+						<execution>
+							<phase>generate-sources</phase>
+							<goals>
+								<goal>generate</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<schemaDirectory>${basedir}/src/main/resources/META-INF/xsd</schemaDirectory>
+						<generateDirectory>${project.build.directory}/generated-sources</generateDirectory>
+						<extension>true</extension>
+						<removeOldOutput>true</removeOldOutput>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>build-helper-maven-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>add-source</id>
+							<phase>generate-sources</phase>
+							<goals>
+								<goal>add-source</goal>
+							</goals>
+							<configuration>
+								<sources>
+									<source>${project.build.directory}/generated-sources</source>
+								</sources>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<configuration>
+						<quiet>true</quiet>
+						<detectOfflineLinks>false</detectOfflineLinks>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>com.google.code.maven-replacer-plugin</groupId>
+					<artifactId>replacer</artifactId>
+					<version>1.5.3</version>
+					<executions>
+						<execution>
+							<id>replacer-webXml</id>
+							<phase>generate-sources</phase>
+							<configuration>
+								<file>${basedir}/src/main/webapp/WEB-INF/web_maven.xml</file>
+								<outputFile>${basedir}/src/main/webapp/WEB-INF/web.xml</outputFile>
+								<replacements>
+									<replacement>
+										<token>MAVEN_REFRESH_PERIOD</token>
+										<value>${refreshPeriod}</value>
+									</replacement>
+									<replacement>
+										<token>MAVEN_POM_PROPERTIES_PATH</token>
+										<value>${pomPropertiesPath}</value>
+									</replacement>
+								</replacements>
+							</configuration>
+						</execution>
+						<execution>
+							<id>replacer-jbossClassLoading</id>
+							<phase>generate-sources</phase>
+							<configuration>
+								<file>${basedir}/src/main/webapp/WEB-INF/jboss-classloading_maven.xml</file>
+								<outputFile>${basedir}/src/main/webapp/WEB-INF/jboss-classloading.xml</outputFile>
+								<replacements>
+									<replacement>
+										<token>MAVEN_PARENT_DOMAIN</token>
+										<value>${parentDomainClassLoader}</value>
+									</replacement>
+								</replacements>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>cleanJbossClassLoading</id>
+							<phase>generate-sources</phase>
+							<configuration>
+								<target>
+									<delete
+										file="${basedir}/src/main/webapp/WEB-INF/jboss-classloading.xml" />
+								</target>
+								<failOnError>false</failOnError>
+							</configuration>
+						</execution>
+					</executions>
+					<dependencies>
+						<dependency>
+							<groupId>org.apache.ant</groupId>
+							<artifactId>ant-jsch</artifactId>
+							<version>1.8.4</version>
+						</dependency>
+						<dependency>
+							<groupId>commons-logging</groupId>
+							<artifactId>commons-logging</artifactId>
+							<version>1.1.1</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+
+				<plugin>
+					<artifactId>maven-jar-plugin</artifactId>
+					<configuration>
+						<displayName>${project.artifactId}</displayName>
+						<archive>
+							<index>true</index>
+							<manifest>
+								<addClasspath>true</addClasspath>
+								<classpathPrefix>lib/</classpathPrefix>
+							</manifest>
+						</archive>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<artifactId>maven-war-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>default-war</id>
+							<configuration>
+								<archive>
+									<manifest>
+										<addClasspath>true</addClasspath>
+										<classpathPrefix>lib/</classpathPrefix>
+									</manifest>
+								</archive>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>
